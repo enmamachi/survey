@@ -11,3 +11,37 @@
       service:
         name: nginx
         state: started
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+        server:
+  host: localhost
+  port: 8080
+
+database:
+  user: admin
+  password: secret
+  name: my_database
