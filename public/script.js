@@ -1,4 +1,4 @@
-document.getElementById('survey-form').addEventListener('submit', function(event) {
+document.getElementById('survey-form')?.addEventListener('submit', function(event) {
     event.preventDefault(); // Mencegah pengiriman formulir default
 
     const formData = new FormData(this);
@@ -27,6 +27,6 @@ document.getElementById('survey-form').addEventListener('submit', function(event
 });
 
 // Fungsi untuk mengunduh hasil survei
-document.getElementById('download-btn').addEventListener('click', function() {
+document.getElementById('download-btn')?.addEventListener('click', function() {
     window.location.href = '/download';
 });
