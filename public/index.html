@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,6 +55,7 @@
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
+            <div id="emailError" class="error"></div>
 
             <label for="feedback">Feedback:</label>
             <textarea id="feedback" name="feedback" required></textarea>
@@ -23,6 +64,27 @@
         </form>
         <p>After submitting, you can <a href="download.html">download the results</a>.</p>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('survey-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah pengiriman formulir default
+
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+
+            // Reset pesan kesalahan
+            emailError.textContent = '';
+
+            // Validasi email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Pola regex untuk validasi email
+            if (!emailPattern.test(email)) {
+                emailError.textContent = 'Email tidak valid. Silakan masukkan email yang benar.';
+                return; // Hentikan eksekusi jika email tidak valid
+            }
+
+            // Jika semua validasi berhasil
+            alert('Form submitted successfully!');
+            // Di sini Anda dapat menambahkan kode untuk mengirim data ke server
+        });
+    </script>
 </body>
 </html>
